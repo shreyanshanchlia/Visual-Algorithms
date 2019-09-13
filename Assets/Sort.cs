@@ -32,11 +32,11 @@ public class Sort : MonoBehaviour
 				if (parentLines.transform.GetChild(j).localScale.y > parentLines.transform.GetChild(j + 1).localScale.y)
 				{
 					forSwapTransform = parentLines.transform.GetChild(j).localScale;
-					parentLines.transform.GetChild(j).GetComponent<SpriteRenderer>().color = highlight;
+					parentLines.transform.GetChild(j + 1).GetComponent<SpriteRenderer>().color = highlight;
 					parentLines.transform.GetChild(j).localScale = parentLines.transform.GetChild(j+1).localScale;
 					parentLines.transform.GetChild(j + 1).localScale = forSwapTransform;
 					yield return null;
-					parentLines.transform.GetChild(j).GetComponent<SpriteRenderer>().color = normal;
+					parentLines.transform.GetChild(j + 1).GetComponent<SpriteRenderer>().color = normal;
 				}
 			}
 			parentLines.transform.GetChild(i).GetComponent<SpriteRenderer>().color = normal; ;
