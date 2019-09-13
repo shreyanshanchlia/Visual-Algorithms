@@ -20,7 +20,7 @@ public class LineMaker : MonoBehaviour
 		childTransform = Vector3.zero;
 		childScale = Vector3.zero;
 		thickness = 10.0f;
-		for (int i = 0; i < noOfLines; i++)
+		for (int i = (int)noOfLines-1; i >= 0; i--)
 		{
 			height = Random.Range(5, 50);
 			instantiatedLine = Instantiate(linePrefab, parentLines.transform);

@@ -10,6 +10,7 @@ public class Sort : MonoBehaviour
 		instance = this;
 	}
 	public GameObject parentLines;
+	public Color normal, highlight, sorted, reference;
 	private Vector3 forSwapTransform;
     public void BubbleSort()
 	{
@@ -22,14 +23,17 @@ public class Sort : MonoBehaviour
 		{
 			for (int j = 0; j < n - i - 1; j++)
 			{
-				if (parentLines.transform.GetChild(j).localScale.y < parentLines.transform.GetChild(j + 1).localScale.y)
+				if (parentLines.transform.GetChild(j).localScale.y > parentLines.transform.GetChild(j + 1).localScale.y)
 				{
 					forSwapTransform = parentLines.transform.GetChild(j).localScale;
+					parentLines.transform.GetChild(j).GetComponent<SpriteRenderer>().color = highlight;
 					parentLines.transform.GetChild(j).localScale = parentLines.transform.GetChild(j+1).localScale;
 					parentLines.transform.GetChild(j + 1).localScale = forSwapTransform;
 					yield return null;
+					parentLines.transform.GetChild(j).GetComponent<SpriteRenderer>().color = normal;
 				}
 			}
+			parentLines.transform.GetChild(i).GetComponent<SpriteRenderer>().color = normal; ;
 		}
 	}
 }
