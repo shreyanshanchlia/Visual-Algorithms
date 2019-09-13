@@ -608,7 +608,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 174.41, y: 33.214}
-  m_SizeDelta: {x: 105.600975, y: 73.6691}
+  m_SizeDelta: {x: 103.51351, y: 72.64374}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &439743043
 GameObject:
@@ -861,14 +861,14 @@ MonoBehaviour:
   listItems:
   - Bubble-Sort
   - Selection-Sort
+  - Insertion-Sort
   - Quick-Sort
-  - Quick-Sort
-  - Quick-Sort
+  - Merge-Sort
   autoMaxItemHeight: 1
   percentageOfScreenHeight: 50
   manualMaxItemHeight: 0
   currentSelection: -1
-  expandDirection: 1
+  expandDirection: 2
   listLayer: {fileID: 959480331}
   selectedText: {fileID: 1552872030}
   cancelLayer: {fileID: 804458243}
