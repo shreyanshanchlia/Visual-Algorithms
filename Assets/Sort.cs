@@ -5,6 +5,7 @@ using UnityEngine;
 public class Sort : MonoBehaviour
 {
 	public static Sort instance;
+	private int algorithm = 1;
 	private void Start()
 	{
 		instance = this;
@@ -12,7 +13,12 @@ public class Sort : MonoBehaviour
 	public GameObject parentLines;
 	public Color normal, highlight, sorted, reference;
 	private Vector3 forSwapTransform;
-    public void BubbleSort()
+	public void sort()
+	{
+
+	}
+#region
+	public void BubbleSort()
 	{
 		StartCoroutine(BubbleSortCoroutine());
 	}
@@ -36,4 +42,5 @@ public class Sort : MonoBehaviour
 			parentLines.transform.GetChild(i).GetComponent<SpriteRenderer>().color = normal; ;
 		}
 	}
+#endregion
 }
