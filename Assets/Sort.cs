@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Sort : MonoBehaviour
 {
+	public static Sort instance;
+	private void Start()
+	{
+		instance = this;
+	}
 	public GameObject parentLines;
 	private Vector3 forSwapTransform;
     public void BubbleSort()

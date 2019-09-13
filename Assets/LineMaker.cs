@@ -12,6 +12,7 @@ public class LineMaker : MonoBehaviour
 
 	public void MakeLines(float noOfLines)
 	{
+		Sort.instance.StopAllCoroutines();
 		foreach (Transform child in parentLines.transform)
 		{
 			GameObject.Destroy(child.gameObject);
