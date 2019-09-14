@@ -16,6 +16,7 @@ public class Sort : MonoBehaviour
 	private Vector3 forSwapTransform;
 	public void sort()
 	{
+		print(t);
 		t = 0.0f;
 		BubbleSort();
 	}
@@ -47,7 +48,7 @@ public class Sort : MonoBehaviour
 			}
 			parentLines.transform.GetChild(i).GetComponent<SpriteRenderer>().color = normal;
 		}
-		print(t);
+		Debug.Log(t);
 	}
 #endregion
 }

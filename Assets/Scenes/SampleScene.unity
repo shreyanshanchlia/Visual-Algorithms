@@ -651,7 +651,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 174.41, y: 33.214}
-  m_SizeDelta: {x: 102.568306, y: 72.382515}
+  m_SizeDelta: {x: 104.512634, y: 72.180504}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &389323918
 MonoBehaviour:
@@ -2020,7 +2020,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 823912335}
   m_HandleRect: {fileID: 823912333}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2766,7 +2766,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 199668936}
-        m_MethodName: BubbleSort
+        m_MethodName: sort
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3521,7 +3521,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0000076293945}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 30, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1427832501
