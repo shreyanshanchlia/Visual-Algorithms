@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-using System;
 
 public class LineMaker : MonoBehaviour
 {
@@ -68,7 +66,7 @@ public class LineMaker : MonoBehaviour
 			numbers[i - 1] = i;
 			numbersList.Add(i);
 		}
-		Shuffle<int>(numbers, shuffledNumbers, numbersList);
+		Shuffle<int>(shuffledNumbers, numbersList);
 		for (int i = (int)noOfLines - 1; i >= 0; i--)
 		{
 			height = shuffledNumbers[i];
@@ -81,9 +79,9 @@ public class LineMaker : MonoBehaviour
 		}
 	}
 
-	private void Shuffle<T>(T[] numbers, int[] shuffledNumbers, List<int> numbersList)
+	private void Shuffle<T>(T[] shuffledNumbers, List<T> numbersList)
 	{
-		int n = numbers.Length;
+		int n = numbersList.Count;
 		int r;
 		for(int i = 0; i < n; i++)
 		{
