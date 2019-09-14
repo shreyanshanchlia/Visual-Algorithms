@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Sort : MonoBehaviour
 {
+	float t = 0.0f;
 	public static Sort instance;
 	private int algorithm = 1;
 	private void Start()
@@ -15,9 +16,14 @@ public class Sort : MonoBehaviour
 	private Vector3 forSwapTransform;
 	public void sort()
 	{
-
+		t = 0.0f;
+		BubbleSort();
 	}
-#region
+	private void Update()
+	{
+		t += Time.deltaTime;
+	}
+	#region bubble sort
 	public void BubbleSort()
 	{
 		StartCoroutine(BubbleSortCoroutine());
@@ -39,8 +45,9 @@ public class Sort : MonoBehaviour
 					parentLines.transform.GetChild(j + 1).GetComponent<SpriteRenderer>().color = normal;
 				}
 			}
-			parentLines.transform.GetChild(i).GetComponent<SpriteRenderer>().color = normal; ;
+			parentLines.transform.GetChild(i).GetComponent<SpriteRenderer>().color = normal;
 		}
+		print(t);
 	}
 #endregion
 }
