@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using MaterialUI;
+using System;
 
 public class State : MonoBehaviour
 {
@@ -13,7 +12,7 @@ public class State : MonoBehaviour
     void Start()
     {
 		repeat.isOn = PlayerPrefs.GetInt("Repeat") == 1 ? true : false;
-		algorithm.currentSelection = PlayerPrefs.GetInt("Algorithm");
+		algorithm.currentSelection = Array.IndexOf(algorithm.listItems, PlayerPrefs.GetString("Algorithm", "Bubble-Sort"));
 		currentAlgorithmText.text = algorithm.listItems[algorithm.currentSelection];
     }
 	public void RepeatSwitch(bool shouldRepeat)
@@ -23,7 +22,6 @@ public class State : MonoBehaviour
 	}
 	public void AlgorithmChange()
 	{
-		int switchAlgorithm = algorithm.currentSelection;
-		PlayerPrefs.SetInt("Algorithm", switchAlgorithm);
+		PlayerPrefs.SetString("Algorithm", algorithm.listItems[algorithm.currentSelection]);
 	}
 }

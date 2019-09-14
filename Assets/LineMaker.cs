@@ -11,8 +11,18 @@ public class LineMaker : MonoBehaviour
 	private int height;
 	private float heightMultiplier;
 	private float thickness;
-	
-	public void MakeLinesRepeatOn(float noOfLines)
+	public void MakeLines(float noOfLines)
+	{
+		if(PlayerPrefs.GetInt("Repeat", 0) == 1)
+		{
+			MakeLinesRepeatOn((int)noOfLines);
+		}
+		else
+		{
+			MakeLinesRepeatOff((int)noOfLines);
+		}
+	}
+	public void MakeLinesRepeatOn(int noOfLines)
 	{
 		Sort.instance.StopAllCoroutines();
 		foreach (Transform child in parentLines.transform)
@@ -37,7 +47,7 @@ public class LineMaker : MonoBehaviour
 			instantiatedLine.transform.localScale = childScale;
 		}
 	}
-	public void MakeLinesRepeatOff(float noOfLines)
+	public void MakeLinesRepeatOff(int noOfLines)
 	{
 		Sort.instance.StopAllCoroutines();
 		foreach (Transform child in parentLines.transform)
