@@ -10,13 +10,14 @@
 
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 
 namespace MaterialUI
 {
 	public class SelectionBoxSubscriber : MonoBehaviour
 	{
 		SelectionBoxConfig config;
-
+		public UnityEvent OnValueChange;
 		void OnEnable ()
 		{
 			//	Example of what you can do when an item is selected
@@ -31,6 +32,7 @@ namespace MaterialUI
 
 		void DoThing (int id)
 		{
+			OnValueChange.Invoke();
 			Debug.Log ("'" + config.listItems[id] + "' picked, ID: " + id);
 		}
 	}

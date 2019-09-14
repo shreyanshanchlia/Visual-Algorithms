@@ -651,7 +651,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 174.41, y: 33.214}
-  m_SizeDelta: {x: 103.51351, y: 72.64374}
+  m_SizeDelta: {x: 102.568306, y: 72.382515}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &389323918
 MonoBehaviour:
@@ -667,6 +667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   repeat: {fileID: 529632047}
   algorithm: {fileID: 446666699}
+  currentAlgorithmText: {fileID: 1552872030}
 --- !u!1 &439743043
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,6 +834,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 130ef026d3b5c8b4d94ea709ea292aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnValueChange:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 389323918}
+        m_MethodName: AlgorithmChange
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &446666696
 MonoBehaviour:
   m_ObjectHideFlags: 0
