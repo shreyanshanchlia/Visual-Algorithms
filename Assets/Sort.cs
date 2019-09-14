@@ -19,7 +19,7 @@ public class Sort : MonoBehaviour
 		t = 0.0f;
 		string algo = PlayerPrefs.GetString("Algorithm");
 		algo = algo.Remove(algo.IndexOf('-'),1);
-		print(algo);
+		//print(algo);
 		StartCoroutine(algo);
 	}
 	private void Update()
@@ -72,6 +72,29 @@ public class Sort : MonoBehaviour
 			parentLines.transform.GetChild(min_idx).localScale = parentLines.transform.GetChild(i).localScale;
 			parentLines.transform.GetChild(i).localScale = forSwapTransform;
 			parentLines.transform.GetChild(min_idx).GetComponent<SpriteRenderer>().color = normal;
+		}
+		Debug.Log(t);
+	}
+	#endregion
+	#region insertion sort
+	IEnumerator InsertionSort()
+	{
+		int n = parentLines.transform.childCount, j;
+		float key;
+		for (int i = 0; i < n; i++)
+		{
+			key = parentLines.transform.GetChild(i).localScale.y;
+			for (j = i - 1; j >= 0 && parentLines.transform.GetChild(j).localScale.y > key;)
+			{
+				parentLines.transform.GetChild(j).GetComponent<SpriteRenderer>().color = highlight;
+				parentLines.transform.GetChild(j + 1).localScale = parentLines.transform.GetChild(j).localScale;
+				j--;
+				yield return null;
+				parentLines.transform.GetChild(j + 1).GetComponent<SpriteRenderer>().color = normal;
+			}
+			forSwapTransform = parentLines.transform.GetChild(j + 1).localScale;
+			forSwapTransform.y = key;
+			parentLines.transform.GetChild(j + 1).localScale = forSwapTransform;
 		}
 		Debug.Log(t);
 	}
