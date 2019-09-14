@@ -22,7 +22,7 @@ public class LineMaker : MonoBehaviour
 			MakeLinesRepeatOff((int)noOfLines);
 		}
 	}
-	public void MakeLinesRepeatOn(int noOfLines)
+	private void MakeLinesRepeatOn(int noOfLines)
 	{
 		Sort.instance.StopAllCoroutines();
 		foreach (Transform child in parentLines.transform)
@@ -47,7 +47,7 @@ public class LineMaker : MonoBehaviour
 			instantiatedLine.transform.localScale = childScale;
 		}
 	}
-	public void MakeLinesRepeatOff(int noOfLines)
+	private void MakeLinesRepeatOff(int noOfLines)
 	{
 		Sort.instance.StopAllCoroutines();
 		foreach (Transform child in parentLines.transform)
