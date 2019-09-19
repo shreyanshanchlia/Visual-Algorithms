@@ -99,4 +99,26 @@ public class Sort : MonoBehaviour
 		Debug.Log(t);
 	}
 	#endregion
+	#region quick sort
+	IEnumerator QuickSort()
+	{
+		int n = parentLines.transform.childCount, j;
+		for (int i = 0; i < n; i++)
+		{
+			key = parentLines.transform.GetChild(i).localScale.y;
+			for (j = i - 1; j >= 0 && parentLines.transform.GetChild(j).localScale.y > key;)
+			{
+				parentLines.transform.GetChild(j).GetComponent<SpriteRenderer>().color = highlight;
+				parentLines.transform.GetChild(j + 1).localScale = parentLines.transform.GetChild(j).localScale;
+				j--;
+				yield return null;
+				parentLines.transform.GetChild(j + 1).GetComponent<SpriteRenderer>().color = normal;
+			}
+			forSwapTransform = parentLines.transform.GetChild(j + 1).localScale;
+			forSwapTransform.y = key;
+			parentLines.transform.GetChild(j + 1).localScale = forSwapTransform;
+		}
+		Debug.Log(t);
+	}
+	#endregion
 }
