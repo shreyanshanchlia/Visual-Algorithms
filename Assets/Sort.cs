@@ -63,9 +63,9 @@ public class Sort : MonoBehaviour
 				{
 					min_idx = j;
 				}
-				yield return null;
 				parentLines.transform.GetChild(j).GetComponent<SpriteRenderer>().color = normal;
 			}
+				yield return null;
 			forSwapTransform = parentLines.transform.GetChild(min_idx).localScale;
 			/*color*/
 			parentLines.transform.GetChild(min_idx).GetComponent<SpriteRenderer>().color = highlight;
@@ -102,23 +102,23 @@ public class Sort : MonoBehaviour
 	#region quick sort
 	IEnumerator QuickSort()
 	{
-		int n = parentLines.transform.childCount, j;
-		for (int i = 0; i < n; i++)
-		{
-			key = parentLines.transform.GetChild(i).localScale.y;
-			for (j = i - 1; j >= 0 && parentLines.transform.GetChild(j).localScale.y > key;)
-			{
-				parentLines.transform.GetChild(j).GetComponent<SpriteRenderer>().color = highlight;
-				parentLines.transform.GetChild(j + 1).localScale = parentLines.transform.GetChild(j).localScale;
-				j--;
-				yield return null;
-				parentLines.transform.GetChild(j + 1).GetComponent<SpriteRenderer>().color = normal;
-			}
-			forSwapTransform = parentLines.transform.GetChild(j + 1).localScale;
-			forSwapTransform.y = key;
-			parentLines.transform.GetChild(j + 1).localScale = forSwapTransform;
-		}
-		Debug.Log(t);
-	}
+        int n = parentLines.transform.childCount;
+        for (int i = 0; i < n - 1; i++)
+        {
+            for (int j = 0; j < n - i - 1; j++)
+            {
+                parentLines.transform.GetChild(j + 1).GetComponent<SpriteRenderer>().color = highlight;
+                if (parentLines.transform.GetChild(j).localScale.y > parentLines.transform.GetChild(j + 1).localScale.y)
+                {
+                    forSwapTransform = parentLines.transform.GetChild(j).localScale;
+                    parentLines.transform.GetChild(j).localScale = parentLines.transform.GetChild(j + 1).localScale;
+                    parentLines.transform.GetChild(j + 1).localScale = forSwapTransform;
+                }
+                yield return new WaitForSeconds(0.0f);
+                parentLines.transform.GetChild(j + 1).GetComponent<SpriteRenderer>().color = normal;
+            }
+        }
+        Debug.Log(t);
+    }
 	#endregion
 }
