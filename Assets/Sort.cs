@@ -78,7 +78,7 @@ public class Sort : MonoBehaviour
 			for (int j = 0; j < n - i - 1; j++)
 			{
 				ApplyHighlightColor(j);
-				ApplyReferenceColor(j+1);
+				ApplyReferenceColor(j + 1);
 				if (CompareYScale(j, j + 1) == CompareResult.greater)
 				{
 					Swap(j, j + 1);
