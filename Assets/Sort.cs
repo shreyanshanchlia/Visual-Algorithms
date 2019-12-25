@@ -73,18 +73,21 @@ public class Sort : MonoBehaviour
 	IEnumerator BubbleSort()
 	{
 		int n = LineMaker.NumberOfLines;
-		for (int i = 0; i < n - 1; i++)
+		for (int i = 0; i <= n - 1; i++)
 		{
 			for (int j = 0; j < n - i - 1; j++)
 			{
-				ApplyHighlightColor(j + 1);
+				ApplyHighlightColor(j);
+				ApplyReferenceColor(j+1);
 				if (CompareYScale(j, j + 1) == CompareResult.greater)
 				{
 					Swap(j, j + 1);
 				}
 				yield return new WaitForSeconds(0.0f);
-				ApplyNormalColor(j + 1);
+				ApplyNormalColor(j);
+				//ApplyNormalColor(j + 1);
 			}
+			ApplySortedColor(n - i - 1);
 		}
 		Debug.Log(t);
 	}
