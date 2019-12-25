@@ -97,20 +97,25 @@ public class Sort : MonoBehaviour
 	{
 		int n = LineMaker.NumberOfLines;
 		int min_idx;
-		for (int i = 0; i < n - 1; i++)
+		for (int i = 0; i < n; i++)
 		{
 			min_idx = i;
 			for (int j = i + 1; j < n; j++)
 			{
 				ApplyHighlightColor(j);
+				ApplyReferenceColor(min_idx);
 				if (CompareYScale(j, min_idx) == CompareResult.smaller)
 				{
+					ApplyNormalColor(min_idx);
 					min_idx = j;
+					ApplyReferenceColor(min_idx);
 				}
+				yield return new WaitForSeconds(0.0f);
 				ApplyNormalColor(j);
 			}
-			yield return new WaitForSeconds(0.1f);
+			ApplyNormalColor(min_idx);
 			Swap(min_idx, i);
+			ApplySortedColor(i);
 		}
 		Debug.Log(t);
 	}
@@ -119,11 +124,11 @@ public class Sort : MonoBehaviour
 	IEnumerator InsertionSort()
 	{
 		int n = LineMaker.NumberOfLines, j;
-		float key;
+		int key;
 		for (int i = 0; i < n; i++)
 		{
-			key = parentLines.transform.GetChild(i).localScale.y;
-			for (j = i - 1; j >= 0 && parentLines.transform.GetChild(j).localScale.y > key;)
+			key = i;
+			for (j = i - 1; j >= 0 && parentLines.transform.GetChild(j).localScale.y > parentLines.transform.GetChild(key).localScale.y;)
 			{
 				ApplyHighlightColor(j);
 				parentLines.transform.GetChild(j + 1).localScale = parentLines.transform.GetChild(j).localScale;
@@ -131,9 +136,10 @@ public class Sort : MonoBehaviour
 				yield return null;
 				ApplyNormalColor(j + 1);
 			}
-			forSwapTransform = parentLines.transform.GetChild(j + 1).localScale;
-			forSwapTransform.y = key;
-			parentLines.transform.GetChild(j + 1).localScale = forSwapTransform;
+			Swap(j + 1, key);
+			//forSwapTransform = parentLines.transform.GetChild(j + 1).localScale;
+			//forSwapTransform.y = parentLines.transform.GetChild(key).localScale.y;
+			//parentLines.transform.GetChild(j + 1).localScale = forSwapTransform;
 		}
 		Debug.Log(t);
 	}
