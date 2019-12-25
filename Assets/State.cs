@@ -2,12 +2,13 @@
 using UnityEngine.UI;
 using MaterialUI;
 using System;
+using TMPro;
 
 public class State : MonoBehaviour
 {
 	public Toggle repeat;
 	public SelectionBoxConfig algorithm;
-	public Text currentAlgorithmText;
+	public TextMeshProUGUI currentAlgorithmText;
     // Start is called before the first frame update
     void Start()
     {

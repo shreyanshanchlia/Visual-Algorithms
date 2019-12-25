@@ -11,6 +11,7 @@ public class LineMaker : MonoBehaviour
 	private int height;
 	private float heightMultiplier;
 	private float thickness;
+	[HideInInspector] public static int NumberOfLines;
 	public void MakeLines(float noOfLines)
 	{
 		if(PlayerPrefs.GetInt("Repeat", 0) == 1)
@@ -21,6 +22,7 @@ public class LineMaker : MonoBehaviour
 		{
 			MakeLinesRepeatOff((int)noOfLines);
 		}
+		NumberOfLines = (int)noOfLines;
 	}
 	private void MakeLinesRepeatOn(int noOfLines)
 	{
