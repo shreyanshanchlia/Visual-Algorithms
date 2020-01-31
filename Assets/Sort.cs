@@ -129,10 +129,15 @@ public class Sort : MonoBehaviour
 			j = i;
 			while(j>=1 && CompareYScale(j, j-1) == CompareResult.smaller)
 			{
+				ApplyHighlightColor(j);
+				ApplyReferenceColor(j - 1);
 				Swap(j, j - 1);
 				j--;
 				yield return null;
+				ApplySortedColor(j + 1);
+				ApplySortedColor(j);
 			}
+		    ApplySortedColor(0);
 		}
 	}
 	#endregion
