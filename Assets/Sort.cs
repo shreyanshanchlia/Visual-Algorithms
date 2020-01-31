@@ -124,18 +124,16 @@ public class Sort : MonoBehaviour
 	IEnumerator InsertionSort()
 	{
 		int n = LineMaker.NumberOfLines, j;
-		int key = 0;
 		for (int i = 0; i < n; i++)
 		{
-			//key = i;
 			j = i;
 			while(j>=1 && CompareYScale(j, j-1) == CompareResult.smaller)
 			{
 				Swap(j, j - 1);
 				j--;
+				yield return null;
 			}
 		}
-		yield return null;
 	}
 	#endregion
 	#region quick sort
