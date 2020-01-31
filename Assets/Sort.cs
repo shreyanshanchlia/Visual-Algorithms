@@ -124,24 +124,18 @@ public class Sort : MonoBehaviour
 	IEnumerator InsertionSort()
 	{
 		int n = LineMaker.NumberOfLines, j;
-		int key;
+		int key = 0;
 		for (int i = 0; i < n; i++)
 		{
-			key = i;
-			for (j = i - 1; j >= 0 && parentLines.transform.GetChild(j).localScale.y > parentLines.transform.GetChild(key).localScale.y;)
+			//key = i;
+			j = i;
+			while(j>=1 && CompareYScale(j, j-1) == CompareResult.smaller)
 			{
-				ApplyHighlightColor(j);
-				parentLines.transform.GetChild(j + 1).localScale = parentLines.transform.GetChild(j).localScale;
+				Swap(j, j - 1);
 				j--;
-				yield return null;
-				ApplyNormalColor(j + 1);
 			}
-			Swap(j + 1, key);
-			//forSwapTransform = parentLines.transform.GetChild(j + 1).localScale;
-			//forSwapTransform.y = parentLines.transform.GetChild(key).localScale.y;
-			//parentLines.transform.GetChild(j + 1).localScale = forSwapTransform;
 		}
-		Debug.Log(t);
+		yield return null;
 	}
 	#endregion
 	#region quick sort
