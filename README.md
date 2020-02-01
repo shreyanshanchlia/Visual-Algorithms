@@ -9,3 +9,4 @@ This project is for understanding how sorting works. Different kinds of sorting 
 ### Up-Coming algorithms:
 * Merge-Sort
 * Quick-Sort
+* A* Path Finding
