@@ -167,6 +167,8 @@ MonoBehaviour:
   linePrefab: {fileID: 2932695184142983206, guid: 6aa55477ee366024a9977e10ca0534da,
     type: 3}
   parentLines: {fileID: 199668933}
+  HeightText: {fileID: 1822935666896607101, guid: 87f21c9a25b381d4996c1bce8c876b91,
+    type: 3}
 --- !u!114 &199668936
 MonoBehaviour:
   m_ObjectHideFlags: 0

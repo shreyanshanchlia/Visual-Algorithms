@@ -9,12 +9,22 @@ public class Height : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        text.text = @object.transform.localScale.y.ToString();
+        if(@object==null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        text.text = size.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        text.text = @object.transform.localScale.y.ToString();
+        if(@object == null)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        text.text = size.ToString();
     }
 }

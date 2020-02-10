@@ -43,13 +43,14 @@ public class LineMaker : MonoBehaviour
 		{
 			height = UnityEngine.Random.Range(5, 50);
 			instantiatedLine = Instantiate(linePrefab, parentLines.transform);
-			GameObject heightText = Instantiate(HeightText, instantiatedLine.transform.position, Quaternion.identity);
-			heightText.GetComponent<Height>().@object = instantiatedLine;
-			childTransform.x = thickness * 1.05f * ((noOfLines / 2) - i);
 			instantiatedLine.transform.localPosition = childTransform;
 			childScale.x = thickness*100;
 			childScale.y = height*250;
 			instantiatedLine.transform.localScale = childScale;
+			childTransform.x = thickness * 1.05f * ((noOfLines / 2) - i);
+			GameObject heightText = Instantiate(HeightText, instantiatedLine.transform.position, Quaternion.identity);
+			heightText.GetComponent<Height>().@object = instantiatedLine;
+			heightText.GetComponent<Height>().size = height;
 		}
 	}
 	private void MakeLinesRepeatOff(int noOfLines)
@@ -91,6 +92,9 @@ public class LineMaker : MonoBehaviour
 			childScale.x = thickness * 100;
 			childScale.y = height * heightMultiplier;
 			instantiatedLine.transform.localScale = childScale;
+			GameObject heightText = Instantiate(HeightText, instantiatedLine.transform.position, Quaternion.identity);
+			heightText.GetComponent<Height>().@object = instantiatedLine;
+			heightText.GetComponent<Height>().size = height;
 		}
 	}
 
