@@ -163,19 +163,17 @@ public class Sort : MonoBehaviour
 	#region merge sort
 	IEnumerator Merge(int l, int m, int r)
 	{
-		print($"merge l = {l}, m = {m}, r = {r}");
 		int i, j, k;
 		int n1 = m - l + 1;
 		int n2 = r - m;
 		Vector3[] L = new Vector3[n1];
 		Vector3[] R = new Vector3[n2];
-		for (i = 0; i < n1; i++)
-		{
 			/*
 			 * requires adding visual for temp array.
 			*/
+		for (i = 0; i < n1; i++)
+		{
 			L[i] = parentLines.transform.GetChild(l + i).transform.localScale;
-			print($"i={l+1} "+L[i].y);
 		}
 		//print(L.Length);
 		for (j = 0; j < n2; j++)
