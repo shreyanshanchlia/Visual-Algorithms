@@ -15,18 +15,31 @@ public class Sort : MonoBehaviour
 	float t = 0.0f;
 	public static Sort instance;
 	private int algorithm = 1;
-	private void Start()
-	{
-		instance = this;
-	}
+	private WaitForSeconds wait;
 	public GameObject parentLines;
 	public Color normalcolor, highlightcolor, sortedcolor, referencecolor;
 	private Vector3 forSwapTransform;
+	public float waitingTime;
+
+	private void Start()
+	{
+		instance = this;
+		wait = new WaitForSeconds(waitingTime);
+	}
+
 	public void sort()
 	{
+		StopAllCoroutines();
 		t = 0.0f;
 		string algo = PlayerPrefs.GetString("Algorithm");
-		algo = algo.Remove(algo.IndexOf('-'),1);
+		if (algo.Contains("-"))
+		{
+			algo = algo.Remove(algo.IndexOf('-'), 1);
+		}
+		else if (algo.Contains(" "))
+		{
+			algo = algo.Remove(algo.IndexOf(' '), 1);
+		}
 		//Debug.Log(algo);
 		StartCoroutine(algo);
 	}
@@ -34,7 +47,6 @@ public class Sort : MonoBehaviour
 	{
 		t += Time.deltaTime;
 	}
-
 	#region utilities
 	void Swap(int unit1, int unit2)
 	{
@@ -85,7 +97,6 @@ public class Sort : MonoBehaviour
 				}
 				yield return new WaitForSeconds(0.0f);
 				ApplyNormalColor(j);
-				//ApplyNormalColor(j + 1);
 			}
 			ApplySortedColor(n - i - 1);
 		}
@@ -141,24 +152,78 @@ public class Sort : MonoBehaviour
 		}
 	}
 	#endregion
-	#region quick sort
-	IEnumerator QuickSort()
+	#region merge sort
+	IEnumerator Merge(int l, int m, int r)
 	{
-        int n = LineMaker.NumberOfLines;
-        for (int i = 0; i < n - 1; i++)
-        {
-            for (int j = 0; j < n - i - 1; j++)
-            {
-				ApplyHighlightColor(j + 1);
-                if (CompareYScale(j, j + 1) == CompareResult.greater)
-                {
-					Swap(j, j + 1);
-                }
-                yield return new WaitForSeconds(0.0f);
-				ApplyNormalColor(j + 1);
-            }
-        }
-        Debug.Log(t);
-    }
+		int i, j, k;
+		int n1 = m - l + 1;
+		int n2 = r - m;
+		Transform[] L = new Transform[n1], R = new Transform[n2];
+		for (i = 0; i < n1; i++)
+		{
+			/*
+			 * requires adding visual for temp array.
+			*/
+			L[i] = parentLines.transform.GetChild(l + 1);
+		}
+		for (j = 0; j < n2; j++)
+		{
+			R[j] = parentLines.transform.GetChild(m + 1 + j);
+		}
+		yield return wait;
+		//merge them back.
+		i = 0; // Initial index of first subarray 
+		j = 0; // Initial index of second subarray 
+		k = l; // Initial index of merged subarray 
+		while (i < n1 && j < n2)
+		{
+			if (L[i].localScale.y <= R[j].localScale.y)
+			{
+				parentLines.transform.GetChild(k).transform.localScale = L[i].localScale;
+				i++;
+			}
+			else
+			{
+				parentLines.transform.GetChild(k).transform.localScale = R[j].localScale;
+				j++;
+			}
+			k++;
+			yield return wait;
+		}
+		while (i < n1)
+		{
+			parentLines.transform.GetChild(k).transform.localScale = L[i].localScale;
+			i++;
+			k++;
+			yield return wait;
+		}
+		while (j < n2)
+		{
+			parentLines.transform.GetChild(k).transform.localScale = R[j].localScale;
+			j++;
+			k++;
+			yield return wait;
+		}
+	}
+	IEnumerator MergeSortDivide(int l, int n)
+	{
+		//n = n<0?LineMaker.NumberOfLines:n;
+		int r = n;
+		if (l < r)
+		{
+			int m = l + (r - l) / 2;
+			StartCoroutine(MergeSortDivide(l, m));
+			yield return wait;
+			StartCoroutine(MergeSortDivide(m + 1, r));
+			yield return wait;
+			StartCoroutine(Merge(l, m, r));
+		}
+	}
+	IEnumerator MergeSort()
+	{
+		int l = 0, n = LineMaker.NumberOfLines-1;
+		StartCoroutine(MergeSortDivide(l, n));
+		yield return wait;
+	}
 	#endregion
 }
