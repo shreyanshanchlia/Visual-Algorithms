@@ -43,7 +43,8 @@ public class LineMaker : MonoBehaviour
 		{
 			height = UnityEngine.Random.Range(5, 50);
 			instantiatedLine = Instantiate(linePrefab, parentLines.transform);
-			Instantiate(HeightText, instantiatedLine.transform.position, Quaternion.identity);
+			GameObject heightText = Instantiate(HeightText, instantiatedLine.transform.position, Quaternion.identity);
+			heightText.GetComponent<Height>().@object = instantiatedLine;
 			childTransform.x = thickness * 1.05f * ((noOfLines / 2) - i);
 			instantiatedLine.transform.localPosition = childTransform;
 			childScale.x = thickness*100;
