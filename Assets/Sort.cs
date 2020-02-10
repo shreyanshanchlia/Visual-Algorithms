@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,7 +42,14 @@ public class Sort : MonoBehaviour
 			algo = algo.Remove(algo.IndexOf(' '), 1);
 		}
 		//Debug.Log(algo);
-		StartCoroutine(algo);
+		try
+		{
+			StartCoroutine(algo);
+		}
+		catch(Exception e)
+		{
+			Debug.LogError("No such algorithm in list! Try filling an issue." + e.Message);
+		}
 	}
 	private void Update()
 	{
@@ -155,75 +163,80 @@ public class Sort : MonoBehaviour
 	#region merge sort
 	IEnumerator Merge(int l, int m, int r)
 	{
+		print($"merge l = {l}, m = {m}, r = {r}");
 		int i, j, k;
 		int n1 = m - l + 1;
 		int n2 = r - m;
-		Transform[] L = new Transform[n1], R = new Transform[n2];
+		Vector3[] L = new Vector3[n1];
+		Vector3[] R = new Vector3[n2];
 		for (i = 0; i < n1; i++)
 		{
 			/*
 			 * requires adding visual for temp array.
 			*/
-			L[i] = parentLines.transform.GetChild(l + 1);
+			L[i] = parentLines.transform.GetChild(l + i).transform.localScale;
+			print($"i={l+1} "+L[i].y);
 		}
+		//print(L.Length);
 		for (j = 0; j < n2; j++)
 		{
-			R[j] = parentLines.transform.GetChild(m + 1 + j);
+			R[j] = parentLines.transform.GetChild(m + 1 + j).transform.localScale;
 		}
-		yield return wait;
+		//yield return wait;
 		//merge them back.
 		i = 0; // Initial index of first subarray 
 		j = 0; // Initial index of second subarray 
 		k = l; // Initial index of merged subarray 
 		while (i < n1 && j < n2)
 		{
-			if (L[i].localScale.y <= R[j].localScale.y)
+			if (L[i].y <= R[j].y)
 			{
-				parentLines.transform.GetChild(k).transform.localScale = L[i].localScale;
+				parentLines.transform.GetChild(k).transform.localScale = L[i];
 				i++;
 			}
 			else
 			{
-				parentLines.transform.GetChild(k).transform.localScale = R[j].localScale;
+				parentLines.transform.GetChild(k).transform.localScale = R[j];
 				j++;
 			}
 			k++;
-			yield return wait;
+			//yield return wait;
 		}
 		while (i < n1)
 		{
-			parentLines.transform.GetChild(k).transform.localScale = L[i].localScale;
+			parentLines.transform.GetChild(k).transform.localScale = L[i];
 			i++;
 			k++;
-			yield return wait;
+			//yield return wait;
 		}
 		while (j < n2)
 		{
-			parentLines.transform.GetChild(k).transform.localScale = R[j].localScale;
+			parentLines.transform.GetChild(k).transform.localScale = R[j];
 			j++;
 			k++;
-			yield return wait;
 		}
+			yield return wait;
 	}
-	IEnumerator MergeSortDivide(int l, int n)
+	IEnumerator MergeSortDivide(int l, int r)
 	{
 		//n = n<0?LineMaker.NumberOfLines:n;
-		int r = n;
 		if (l < r)
 		{
-			int m = l + (r - l) / 2;
-			StartCoroutine(MergeSortDivide(l, m));
-			yield return wait;
-			StartCoroutine(MergeSortDivide(m + 1, r));
-			yield return wait;
-			StartCoroutine(Merge(l, m, r));
+			int m = (l + r) / 2;
+			//yield return wait;
+			yield return StartCoroutine(MergeSortDivide(l, m));
+			//yield return wait;
+			yield return StartCoroutine(MergeSortDivide(m + 1, r));
+			//yield return wait;
+			yield return StartCoroutine(Merge(l, m, r));
 		}
+		//yield return wait;
 	}
 	IEnumerator MergeSort()
 	{
 		int l = 0, n = LineMaker.NumberOfLines-1;
 		StartCoroutine(MergeSortDivide(l, n));
-		yield return wait;
+		yield return null;
 	}
 	#endregion
 }
