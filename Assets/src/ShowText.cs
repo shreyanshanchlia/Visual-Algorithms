@@ -14,4 +14,12 @@ public class ShowText : MonoBehaviour
     {
         NValueSlider.value = int.Parse(value);
     }
+    public void plus()
+    {
+        NValueSlider.value += 1;
+    }
+    public void minus()
+    {
+        NValueSlider.value -= 1;
+    }
 }
