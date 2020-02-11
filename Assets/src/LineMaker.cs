@@ -30,7 +30,7 @@ public class LineMaker : MonoBehaviour
 		Sort.instance.StopAllCoroutines();
 		foreach (Transform child in parentLines.transform)
 		{
-			GameObject.Destroy(child.gameObject);
+			Destroy(child.gameObject);
 		}
 		childTransform = Vector3.zero;
 		childScale = Vector3.zero;
@@ -41,14 +41,15 @@ public class LineMaker : MonoBehaviour
 		}
 		for (int i = (int)noOfLines-1; i >= 0; i--)
 		{
-			height = UnityEngine.Random.Range(5, 50);
-			instantiatedLine = Instantiate(linePrefab, parentLines.transform);
+			height = Random.Range(5, 50);
+			instantiatedLine = Instantiate(linePrefab, parentLines.transform);  //creates a line
 			instantiatedLine.transform.localPosition = childTransform;
 			childScale.x = thickness*100;
 			childScale.y = height*250;
 			instantiatedLine.transform.localScale = childScale;
 			childTransform.x = thickness * 1.05f * ((noOfLines / 2) - i);
-			GameObject heightText = Instantiate(HeightText, instantiatedLine.transform.position, Quaternion.identity);
+			instantiatedLine.GetComponent<HeightData>().size = height;
+			GameObject heightText = Instantiate(HeightText, instantiatedLine.transform.position, Quaternion.identity);  //creates size text
 			heightText.GetComponent<Height>().@object = instantiatedLine;
 			heightText.GetComponent<Height>().size = height;
 		}
@@ -60,8 +61,8 @@ public class LineMaker : MonoBehaviour
 		{
 			GameObject.Destroy(child.gameObject);
 		}
-		int[] shuffledNumbers = new int[(int)noOfLines];
-		List<int> numbersList = new List<int>((int)noOfLines);
+		int[] shuffledNumbers = new int[noOfLines];
+		List<int> numbersList = new List<int>(noOfLines);
 		childTransform = Vector3.zero;
 		childScale = Vector3.zero;
 		thickness = 10.0f;
@@ -76,23 +77,24 @@ public class LineMaker : MonoBehaviour
 		{
 			heightMultiplier = 15000.0f * 250.0f / (noOfLines * 250.0f);
 		}
-		int[] numbers = new int[(int)noOfLines];
+		int[] numbers = new int[noOfLines];
 		for (int i = 1; i <= noOfLines; i++)
 		{
 			numbers[i - 1] = i;
 			numbersList.Add(i);
 		}
-		Shuffle<int>(shuffledNumbers, numbersList);
-		for (int i = (int)noOfLines - 1; i >= 0; i--)
+		Shuffle(shuffledNumbers, numbersList);
+		for (int i = noOfLines - 1; i >= 0; i--)
 		{
 			height = shuffledNumbers[i];
-			instantiatedLine = Instantiate(linePrefab, parentLines.transform);
+			instantiatedLine = Instantiate(linePrefab, parentLines.transform);	//creates a line
 			childTransform.x = thickness * 1.05f * ((noOfLines / 2) - i);
 			instantiatedLine.transform.localPosition = childTransform;
 			childScale.x = thickness * 100;
 			childScale.y = height * heightMultiplier;
 			instantiatedLine.transform.localScale = childScale;
-			GameObject heightText = Instantiate(HeightText, instantiatedLine.transform.position, Quaternion.identity);
+			instantiatedLine.GetComponent<HeightData>().size = height;
+			GameObject heightText = Instantiate(HeightText, instantiatedLine.transform.position, Quaternion.identity);	//creates size text
 			heightText.GetComponent<Height>().@object = instantiatedLine;
 			heightText.GetComponent<Height>().size = height;
 		}
@@ -104,7 +106,7 @@ public class LineMaker : MonoBehaviour
 		int r;
 		for(int i = 0; i < n; i++)
 		{
-			r = UnityEngine.Random.Range(0, numbersList.Count);
+			r = Random.Range(0, numbersList.Count);
 			shuffledNumbers[i] = numbersList[r];
 			numbersList.RemoveAt(r);
 		}
