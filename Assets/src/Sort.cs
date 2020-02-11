@@ -55,6 +55,7 @@ public class Sort : MonoBehaviour
 	{
 		t += Time.deltaTime;
 	}
+
 	#region utilities
 	void Swap(int unit1, int unit2)
 	{
@@ -89,6 +90,7 @@ public class Sort : MonoBehaviour
 
 	}
 	#endregion
+
 	#region bubble sort
 	IEnumerator BubbleSort()
 	{
@@ -103,7 +105,7 @@ public class Sort : MonoBehaviour
 				{
 					Swap(j, j + 1);
 				}
-				yield return new WaitForSeconds(0.0f);
+				yield return wait;
 				ApplyNormalColor(j);
 			}
 			ApplySortedColor(n - i - 1);
@@ -129,7 +131,7 @@ public class Sort : MonoBehaviour
 					min_idx = j;
 					ApplyReferenceColor(min_idx);
 				}
-				yield return new WaitForSeconds(0.0f);
+				yield return wait;
 				ApplyNormalColor(j);
 			}
 			ApplyNormalColor(min_idx);
@@ -152,7 +154,7 @@ public class Sort : MonoBehaviour
 				ApplyReferenceColor(j - 1);
 				Swap(j, j - 1);
 				j--;
-				yield return null;
+				yield return wait;
 				ApplySortedColor(j + 1);
 				ApplySortedColor(j);
 			}
@@ -168,9 +170,9 @@ public class Sort : MonoBehaviour
 		int n2 = r - m;
 		Vector3[] L = new Vector3[n1];
 		Vector3[] R = new Vector3[n2];
-			/*
-			 * requires adding visual for temp array.
-			*/
+
+		/* requires adding visual for temp array.	*/
+
 		for (i = 0; i < n1; i++)
 		{
 			L[i] = parentLines.transform.GetChild(l + i).transform.localScale;
@@ -179,7 +181,6 @@ public class Sort : MonoBehaviour
 		{
 			R[j] = parentLines.transform.GetChild(m + 1 + j).transform.localScale;
 		}
-		//yield return wait;
 		//merge them back.
 		i = 0; // Initial index of first subarray 
 		j = 0; // Initial index of second subarray 
@@ -246,6 +247,39 @@ public class Sort : MonoBehaviour
 		int l = 0, n = LineMaker.NumberOfLines-1;
 		StartCoroutine(MergeSortDivide(l, n));
 		yield return null;
+	}
+	#endregion
+	#region quick sort
+	int pi;
+	IEnumerator QuickSort()
+	{
+		StartCoroutine(QuickSortDivide(0, LineMaker.NumberOfLines-1));
+		yield return null;
+	}
+	IEnumerator QuickSortDivide(int low, int high)
+	{
+		if (low < high)
+		{
+			yield return StartCoroutine(partition(low, high));
+			yield return StartCoroutine(QuickSortDivide(low, pi - 1));
+			yield return StartCoroutine(QuickSortDivide(pi + 1, high));
+		}
+	}
+	IEnumerator partition(int low, int high)
+	{
+		int i = low - 1;
+		for (int j = low; j < high; j++)
+		{
+			if (CompareYScale(j, high) == CompareResult.smaller)
+			{
+				i++;
+				Swap(i, j);
+				yield return wait;
+			}
+		}
+		pi = i + 1;
+		Swap(i + 1, high);
+		yield return wait;
 	}
 	#endregion
 }
