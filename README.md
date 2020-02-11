@@ -8,6 +8,5 @@ This project is for understanding how sorting works. Different kinds of sorting 
 #### Beta:
 * Merge-Sort
 * Quick-Sort
-
 ### Up-Coming algorithms:
 * A* Path Finding
