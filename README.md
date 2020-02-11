@@ -5,8 +5,8 @@ This project is for understanding how sorting works. Different kinds of sorting 
 * Bubble-Sort
 * Selection-Sort
 * Insertion-Sort
+#### Beta:
 * Merge-Sort
-
-### Up-Coming algorithms:
 * Quick-Sort
+### Up-Coming algorithms:
 * A* Path Finding
