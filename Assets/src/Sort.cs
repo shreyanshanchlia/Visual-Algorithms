@@ -175,7 +175,6 @@ public class Sort : MonoBehaviour
 		{
 			L[i] = parentLines.transform.GetChild(l + i).transform.localScale;
 		}
-		//print(L.Length);
 		for (j = 0; j < n2; j++)
 		{
 			R[j] = parentLines.transform.GetChild(m + 1 + j).transform.localScale;
@@ -198,34 +197,46 @@ public class Sort : MonoBehaviour
 				j++;
 			}
 			k++;
-			//yield return wait;
+			yield return wait;
 		}
 		while (i < n1)
 		{
 			parentLines.transform.GetChild(k).transform.localScale = L[i];
 			i++;
 			k++;
-			//yield return wait;
+			yield return wait;
 		}
 		while (j < n2)
 		{
 			parentLines.transform.GetChild(k).transform.localScale = R[j];
 			j++;
 			k++;
-		}
 			yield return wait;
+		}
 	}
 	IEnumerator MergeSortDivide(int l, int r)
 	{
-		//n = n<0?LineMaker.NumberOfLines:n;
 		if (l < r)
 		{
 			int m = (l + r) / 2;
-			//yield return wait;
+			for(int i = l; i<=m; i++)
+			{
+				ApplyReferenceColor(i);
+			}
 			yield return StartCoroutine(MergeSortDivide(l, m));
-			//yield return wait;
+			for (int i = l; i <= m; i++)
+			{
+				ApplyNormalColor(i);
+			}
+			for (int i = m + 1; i <= r; i++)
+			{
+				ApplyReferenceColor(i);
+			}
 			yield return StartCoroutine(MergeSortDivide(m + 1, r));
-			//yield return wait;
+			for (int i = m+1; i <= r; i++)
+			{
+				ApplyNormalColor(i);
+			}
 			yield return StartCoroutine(Merge(l, m, r));
 		}
 		//yield return wait;
