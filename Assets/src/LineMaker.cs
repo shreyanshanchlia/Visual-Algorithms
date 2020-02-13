@@ -43,11 +43,11 @@ public class LineMaker : MonoBehaviour
 		{
 			height = Random.Range(5, 50);
 			instantiatedLine = Instantiate(linePrefab, parentLines.transform);  //creates a line
+			childTransform.x = thickness * 1.05f * ((noOfLines / 2) - i);
 			instantiatedLine.transform.localPosition = childTransform;
 			childScale.x = thickness*100;
-			childScale.y = height*250;
+			childScale.y = height * 250;
 			instantiatedLine.transform.localScale = childScale;
-			childTransform.x = thickness * 1.05f * ((noOfLines / 2) - i);
 			instantiatedLine.GetComponent<HeightData>().size = height;
 			GameObject heightText = Instantiate(HeightText, instantiatedLine.transform.position, Quaternion.identity);  //creates size text
 			heightText.GetComponent<Height>().@object = instantiatedLine;
@@ -56,6 +56,7 @@ public class LineMaker : MonoBehaviour
 	}
 	private void MakeLinesRepeatOff(int noOfLines)
 	{
+		#region
 		Sort.instance.StopAllCoroutines();
 		foreach (Transform child in parentLines.transform)
 		{
@@ -84,6 +85,7 @@ public class LineMaker : MonoBehaviour
 			numbersList.Add(i);
 		}
 		Shuffle(shuffledNumbers, numbersList);
+		#endregion
 		for (int i = noOfLines - 1; i >= 0; i--)
 		{
 			height = shuffledNumbers[i];
