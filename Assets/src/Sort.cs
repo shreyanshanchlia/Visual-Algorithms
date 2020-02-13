@@ -263,6 +263,7 @@ public class Sort : MonoBehaviour
 			yield return StartCoroutine(QuickSortDivide(low, pi - 1));
 			yield return StartCoroutine(QuickSortDivide(pi + 1, high));
 		}
+		yield return null;
 	}
 	IEnumerator partition(int low, int high)
 	{
