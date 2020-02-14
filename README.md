@@ -10,3 +10,5 @@ This project is for understanding how sorting works. Different kinds of sorting 
 * Quick-Sort
 ### Up-Coming algorithms:
 * A* Path Finding
+
+#### This project uses material UI for unity. More details here: https://github.com/InvexGames/MaterialUI
