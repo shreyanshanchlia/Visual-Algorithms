@@ -184,7 +184,7 @@ MonoBehaviour:
   currentTaskText: {fileID: 1834034778}
   parentLines: {fileID: 199668933}
   normalcolor: {r: 0, g: 0, b: 0, a: 1}
-  highlightcolor: {r: 1, g: 1, b: 0, a: 1}
+  highlightcolor: {r: 0.7924528, g: 0.7924528, b: 0, a: 1}
   sortedcolor: {r: 0, g: 0.8235294, b: 0, a: 1}
   referencecolor: {r: 0, g: 0, b: 1, a: 1}
   waitingTime: 0.5
