@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-
+using TMPro;
 public enum ColorState
 {
 	normal, highlight, sorted, reference
@@ -14,12 +14,14 @@ public class Sort : MonoBehaviour
 {
 	float t = 0.0f;
 	public static Sort instance;
-	private int algorithm = 1;
+	public TextMeshProUGUI currentTaskText;
 	private WaitForSeconds wait;
 	public GameObject parentLines;
 	public Color normalcolor, highlightcolor, sortedcolor, referencecolor;
 	private Vector3 forSwapTransform;
 	public float waitingTime;
+
+	private string swapText = "Swapping", searchingText = "Looping", copyingText = "Copying Data", restoringText = "Restoring";
 
 	private void Start()
 	{
@@ -98,10 +100,12 @@ public class Sort : MonoBehaviour
 		{
 			for (int j = 0; j < n - i - 1; j++)
 			{
+				currentTaskText.text = searchingText;
 				ApplyHighlightColor(j);
 				ApplyReferenceColor(j + 1);
 				if (CompareYScale(j, j + 1) == CompareResult.greater)
 				{
+					currentTaskText.text = swapText;
 					Swap(j, j + 1);
 				}
 				yield return wait;
@@ -109,6 +113,8 @@ public class Sort : MonoBehaviour
 			}
 			ApplySortedColor(n - i - 1);
 		}
+		int timeTaken = (int)t;
+		currentTaskText.text = $"Took {timeTaken}s.";
 		Debug.Log(t);
 	}
 	#endregion
@@ -171,30 +177,35 @@ public class Sort : MonoBehaviour
 		Vector3[] R = new Vector3[n2];
 
 		/* requires adding visual for temp array.	*/
-
+		currentTaskText.text = copyingText;
 		for (i = 0; i < n1; i++)
 		{
 			L[i] = parentLines.transform.GetChild(l + i).transform.localScale;
+			ApplyHighlightColor(l + i);
 		}
 		for (j = 0; j < n2; j++)
 		{
 			R[j] = parentLines.transform.GetChild(m + 1 + j).transform.localScale;
+			ApplyHighlightColor(m + 1 + j);
 		}
 		//merge them back.
 		i = 0; // Initial index of first subarray 
 		j = 0; // Initial index of second subarray 
 		k = l; // Initial index of merged subarray 
+		currentTaskText.text = searchingText;
 		while (i < n1 && j < n2)
 		{
 			if (L[i].y <= R[j].y)
 			{
 				parentLines.transform.GetChild(k).transform.localScale = L[i];
 				i++;
+				ApplySortedColor(k);
 			}
 			else
 			{
 				parentLines.transform.GetChild(k).transform.localScale = R[j];
 				j++;
+				ApplySortedColor(k);
 			}
 			k++;
 			yield return wait;
@@ -202,6 +213,7 @@ public class Sort : MonoBehaviour
 		while (i < n1)
 		{
 			parentLines.transform.GetChild(k).transform.localScale = L[i];
+			ApplySortedColor(k);
 			i++;
 			k++;
 			yield return wait;
@@ -209,6 +221,7 @@ public class Sort : MonoBehaviour
 		while (j < n2)
 		{
 			parentLines.transform.GetChild(k).transform.localScale = R[j];
+			ApplySortedColor(k);
 			j++;
 			k++;
 			yield return wait;
