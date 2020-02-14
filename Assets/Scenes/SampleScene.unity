@@ -187,7 +187,7 @@ MonoBehaviour:
   highlightcolor: {r: 0.7924528, g: 0.7924528, b: 0, a: 1}
   sortedcolor: {r: 0, g: 0.8235294, b: 0, a: 1}
   referencecolor: {r: 0, g: 0, b: 1, a: 1}
-  waitingTime: 0.5
+  waitingTime: 0.1
 --- !u!1 &201709034
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,7 +1490,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.9433962, g: 0.9371662, b: 0.91224635, a: 1}
+  m_BackGroundColor: {r: 0.86666673, g: 0.86666673, b: 0.86666673, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -3927,7 +3927,7 @@ Canvas:
   m_RenderMode: 1
   m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -5408,7 +5408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9971698, g: 1, b: 0.8537736, a: 1}
+  m_Color: {r: 0.83766466, g: 0.8637497, b: 0.9811321, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
