@@ -143,6 +143,8 @@ public class Sort : MonoBehaviour
 			Swap(min_idx, i);
 			ApplySortedColor(i);
 		}
+		int timeTaken = (int)t;
+		currentTaskText.text = $"Took {timeTaken}s.";
 		Debug.Log(t);
 	}
 	#endregion
