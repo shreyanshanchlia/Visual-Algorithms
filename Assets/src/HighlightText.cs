@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using TMPro;
-using UnityEngine.EventSystems;
 public class HighlightText : MonoBehaviour
 {
     public GameObject magnifier;
