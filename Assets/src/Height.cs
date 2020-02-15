@@ -7,6 +7,7 @@ public class Height : MonoBehaviour
     public Gradient gradient;
     public TextMeshProUGUI text;
     float scale;
+    private int prevSize;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +17,7 @@ public class Height : MonoBehaviour
             return;
         }
         size = @object.GetComponent<HeightData>().size;
+        prevSize = size;
         scale = @object.transform.localScale.y/size;
         text.text = size.ToString();
     }
@@ -29,6 +31,11 @@ public class Height : MonoBehaviour
             return;
         }
         size = (int)(@object.transform.localScale.y / scale);
+        if (size != prevSize)
+        {
+            @object.GetComponent<HeightData>().size = size;
+            prevSize = size;
+        }
         text.text = size.ToString();
     }
 }
