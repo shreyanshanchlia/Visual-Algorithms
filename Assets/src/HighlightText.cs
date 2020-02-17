@@ -4,6 +4,9 @@ public class HighlightText : MonoBehaviour
 {
     public GameObject magnifier;
     public TextMeshProUGUI magnifiedText;
+    public GameObject line;
+    GameObject lineobject;
+
     private void Update()
     {
         Vector3 mousePos = Input.mousePosition;
@@ -17,15 +20,19 @@ public class HighlightText : MonoBehaviour
             {
                 magnifier.SetActive(true);
                 magnifiedText.text = hit.collider.gameObject.GetComponent<HeightData>().size.ToString();
+                if(lineobject == null)
+                    lineobject = Instantiate(line, screenPos, Quaternion.identity);
             }
             catch
             {
                 magnifier.SetActive(false);
+                Destroy(lineobject);
             }
         }
         else
         {
             magnifier.SetActive(false);
+            Destroy(lineobject);
         }
     }
 }
