@@ -8,8 +8,8 @@ This project is for understanding how algorithm works. Different kinds of algori
 #### Beta:
 * Merge-Sort
 * Quick-Sort
+### In Development:
 * Spiral Matrix Generator
 ### Up-Coming algorithms:
 * A* Path Finding
-
 #### This project uses material UI for unity. More details here: https://github.com/InvexGames/MaterialUI
