@@ -400,7 +400,7 @@ MonoBehaviour:
   MatrixElement: {fileID: 4148258529390323500, guid: f497d57bcddea124da14e98ac3410c21,
     type: 3}
   parent: {fileID: 73524981}
-  n: 5
+  n: 4
 --- !u!4 &1295052886
 Transform:
   m_ObjectHideFlags: 0

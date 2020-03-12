@@ -20,19 +20,19 @@ public class HighlightText : MonoBehaviour
             {
                 magnifier.SetActive(true);
                 magnifiedText.text = hit.collider.gameObject.GetComponent<HeightData>().size.ToString();
-                if(lineobject == null)
-                    lineobject = Instantiate(line, screenPos, Quaternion.identity);
+                //if(lineobject == null)
+                //    lineobject = Instantiate(line, screenPos, Quaternion.identity);
             }
             catch
             {
                 magnifier.SetActive(false);
-                Destroy(lineobject);
+                //Destroy(lineobject);
             }
         }
         else
         {
             magnifier.SetActive(false);
-            Destroy(lineobject);
+            //Destroy(lineobject);
         }
     }
 }
