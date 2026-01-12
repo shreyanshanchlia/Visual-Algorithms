@@ -1,5 +1,5 @@
 # Visual-Algorithms
-This project is for understanding how algorithm works. Different kinds of algorithms are shown here. Currently works with Unity 2019.2.0f1 or later.
+This project is for understanding how algorithm works. Different kinds of algorithms are shown here.
 
 ## Currently the following algorithms are present:
 * Bubble-Sort
